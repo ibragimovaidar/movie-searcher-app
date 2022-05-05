@@ -33,7 +33,7 @@ public class MovieEntity extends ImageAbstractEntity {
     private Integer averageRating;
 
     @ManyToOne
-    @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private GenreEntity genre;
 
     @ManyToMany(fetch = FetchType.LAZY)

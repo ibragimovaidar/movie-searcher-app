@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="001" author="Aydar Ibragimov">
+        <createTable tableName="image_metadata">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_image_metadata"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="url" type="VARCHAR(255)">
+                <constraints unique="true"/>
+            </column>
+            <column name="height" type="INT"/>
+            <column name="width" type="INT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="002" author="Aydar Ibragimov">
+        <createTable tableName="genre">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_genre"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="image_metadata_id" type="uuid">
+                <constraints foreignKeyName="fk_genre_image_metadata"
+                             referencedTableName="image_metadata"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(1024)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="003" author="Aydar Ibragimov">
+        <createTable tableName="person">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_person"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="image_metadata_id" type="uuid">
+                <constraints foreignKeyName="fk_person_image_metadata"
+                             referencedTableName="image_metadata"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="first_name" type="VARCHAR(64)"/>
+            <column name="last_name" type="VARCHAR(64)"/>
+            <column name="middle_name" type="VARCHAR(64)"/>
+            <column name="description" type="VARCHAR(1024)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="004" author="Aydar Ibragimov">
+        <createTable tableName="movie">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_movie"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="image_metadata_id" type="uuid">
+                <constraints foreignKeyName="fk_movie_image_metadata"
+                             referencedTableName="image_metadata"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(1024)"/>
+            <column name="release_date" type="DATE"/>
+            <column name="country" type="VARCHAR(64)"/>
+            <column name="average_rating" type="INT"/>
+            <column name="genre_id" type="uuid">
+                <constraints foreignKeyName="fk_movie_genre"
+                             referencedTableName="genre"
+                             referencedColumnNames="id"
+                             deleteCascade="true"
+                             initiallyDeferred="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="005" author="Aydar Ibragimov">
+        <createTable tableName="movie_person">
+            <column name="movie_id" type="uuid">
+                <constraints foreignKeyName="fk_movie_person_1"
+                             referencedTableName="movie"
+                             referencedColumnNames="id"
+                             initiallyDeferred="false"
+                             deleteCascade="true"/>
+            </column>
+            <column name="person_id" type="uuid">
+                <constraints foreignKeyName="fk_movie_person_2"
+                             referencedTableName="person"
+                             referencedColumnNames="id"
+                             initiallyDeferred="false"
+                             deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="006" author="Aydar Ibragimov">
+        <createTable tableName="review">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_review"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="rating" type="INT"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="review" type="CLOB"/>
+            <column name="user_id" type="uuid">
+                <constraints foreignKeyName="fk_review_user"
+                             referencedTableName="users"
+                             referencedColumnNames="id"
+                             initiallyDeferred="false"
+                             deleteCascade="true"/>
+            </column>
+            <column name="movie_id" type="uuid">
+                <constraints foreignKeyName="fk_review_movie"
+                             referencedTableName="movie"
+                             referencedColumnNames="id"
+                             initiallyDeferred="false"
+                             deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="007" author="Aydar Ibragimov">
+        <addColumn tableName="users">
+            <column name="image_metadata_id" type="uuid">
+                <constraints foreignKeyName="fk_users_image_metadata"
+                             referencedTableName="image_metadata"
+                             referencedColumnNames="id"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="001" author="Aydar Ibragimov">
+        <createTable tableName="genre_commentary">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_genre_commentary"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="text" type="VARCHAR(255)"/>
+            <column name="user_id" type="uuid">
+                <constraints foreignKeyName="fk_genre_commentary_user"
+                             referencedTableName="users"
+                             referencedColumnNames="id"
+                             deleteCascade="true"
+                             initiallyDeferred="false"
+                />
+            </column>
+            <column name="genre_id" type="uuid">
+                <constraints foreignKeyName="fk_genre_commentary_genre"
+                             referencedTableName="genre"
+                             referencedColumnNames="id"
+                             deleteCascade="true"
+                             initiallyDeferred="false"
+                />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="002" author="Aydar Ibragimov">
+        <createTable tableName="person_commentary">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_person_commentary"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="text" type="VARCHAR(255)"/>
+            <column name="user_id" type="uuid">
+                <constraints foreignKeyName="fk_person_commentary_user"
+                             referencedTableName="users"
+                             referencedColumnNames="id"
+                             deleteCascade="true"
+                             initiallyDeferred="false"
+                />
+            </column>
+            <column name="person_id" type="uuid">
+                <constraints foreignKeyName="fk_person_commentary_person"
+                             referencedTableName="person"
+                             referencedColumnNames="id"
+                             deleteCascade="true"
+                             initiallyDeferred="false"
+                />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="003" author="Aydar Ibragimov">
+        <createTable tableName="movie_commentary">
+            <column name="id" type="uuid">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_movie_commentary"/>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="text" type="VARCHAR(255)"/>
+            <column name="user_id" type="uuid">
+                <constraints foreignKeyName="fk_movie_commentary_user"
+                             referencedTableName="users"
+                             referencedColumnNames="id"
+                             deleteCascade="true"
+                             initiallyDeferred="false"
+                />
+            </column>
+            <column name="movie_id" type="uuid">
+                <constraints foreignKeyName="fk_movie_commentary_movie"
+                             referencedTableName="movie"
+                             referencedColumnNames="id"
+                             deleteCascade="true"
+                             initiallyDeferred="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

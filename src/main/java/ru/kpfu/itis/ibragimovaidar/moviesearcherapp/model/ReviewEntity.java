@@ -17,6 +17,8 @@ public class ReviewEntity extends AbstractEntity {
 
     private String title;
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String review;
 
     @ManyToOne(fetch = FetchType.EAGER)

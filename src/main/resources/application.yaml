@@ -6,11 +6,13 @@ spring:
     url: jdbc:postgresql://localhost:5432/moviesearcherapp
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
   servlet:
     multipart:
       max-file-size: 5MB
       max-request-size: 15MB
+  liquibase:
+    change-log: db/changelog/database_movie_searcher_app_changelog.xml
 
 
 app:

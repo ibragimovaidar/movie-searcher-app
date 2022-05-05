@@ -28,6 +28,9 @@ public class UserEntity extends ImageAbstractEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "hash_password")
+    private String hashPassword;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_roles",
