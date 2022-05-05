@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: moviesearcherapp
+    password: moviesearcherapp
+    url: jdbc:postgresql://localhost:5432/moviesearcherapp
+  jpa:
+    hibernate:
+      ddl-auto: create
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 15MB
+
+
+app:
+  cloudinary:
+    cloud-name: dbi0vhbuc
+    api-key: 476437238943156
+    api-secret: -_csiDEAzw9_iZEVMEl2yx-UWsw
+
+  properties:
+    image:
+      profile-image-height: 256
+      profile-image-width: 256
+      movie-image-height: 512
+      movie-image-width: 512
+      genre-image-height: 512
+      genre-image-width: 512
+      person-image-height: 512
+      person-image-width: 512
