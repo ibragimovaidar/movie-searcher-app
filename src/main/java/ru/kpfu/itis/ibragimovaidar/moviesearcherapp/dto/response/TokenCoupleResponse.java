@@ -5,23 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.dto.enums.Role;
-
-import java.util.Set;
-import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserResponse {
+public class TokenCoupleResponse {
 
-    private UUID id;
+    private String accessToken;
 
-    private String email;
-
-    private String username;
-
-    private Set<Role> roles;
+    private String refreshToken;
 }

@@ -31,3 +31,7 @@ app:
       genre-image-width: 512
       person-image-height: 512
       person-image-width: 512
+
+  jwt:
+    access-token-expiration-millis: 86400000
+    secret: secret
