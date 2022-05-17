@@ -34,7 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PERMIT_ALL = {
             "/api/v1/users/login",
-            "/api/v1/users/register"
+            "/api/v1/users/register",
+            "/api/v1/genres/**",
+            "/signIn"
     };
 
     private static final String[] IGNORE = {
@@ -61,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .csrf().disable()
+                .cors().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
                 .logout().disable();

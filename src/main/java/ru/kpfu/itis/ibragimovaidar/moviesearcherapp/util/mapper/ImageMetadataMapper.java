@@ -9,4 +9,8 @@ import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.model.ImageMetadataEntity;
 public interface ImageMetadataMapper {
 
     ImageMetadataResponse imageMetadataToImageMetadataResponse(ImageMetadataEntity imageMetadata);
+
+    static String imageMetadataToImageUrl(ImageMetadataEntity imageMetadata){
+        return imageMetadata.getUrl();
+    }
 }

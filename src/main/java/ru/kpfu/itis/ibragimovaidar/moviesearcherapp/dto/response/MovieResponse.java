@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 @AllArgsConstructor
@@ -13,5 +15,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MovieResponse {
 
+    private UUID id;
+
     private String name;
+
+    private String imageUrl;
 }

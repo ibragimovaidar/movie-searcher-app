@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 @AllArgsConstructor
@@ -13,7 +15,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class GenreResponse {
 
+    private UUID id;
+
     private String name;
 
     private String description;
+
+    private String imageUrl;
 }
