@@ -14,10 +14,13 @@ import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.exception.NotFoundException;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.exception.ServiceException;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.exception.UnauthorizedException;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.exception.UserNotFoundException;
+import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.model.ImageMetadataEntity;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.model.UserEntity;
+import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.repository.ImageMetadataRepository;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.repository.RoleRepository;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.repository.UserRepository;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.service.UserService;
+import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.service.cdn.ImageCdnService;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.service.jwt.JwtTokenService;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.util.mapper.UserMapper;
 
@@ -34,13 +37,18 @@ public class UserServiceImpl implements UserService {
 
     private final RoleRepository roleRepository;
 
+    private final ImageMetadataRepository imageMetadataRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final UserMapper userMapper;
 
+    private final ImageCdnService imageCdnService;
+
     @Override
     public UserResponse getByUsername(String username) {
-        return null;
+        return userMapper.userToUserResponse(
+                userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new));
     }
 
     @Override
@@ -50,9 +58,12 @@ public class UserServiceImpl implements UserService {
                         UserEntity.builder()
                                 .username(userRequest.getUsername())
                                 .email(userRequest.getEmail())
+                                .firstName(userRequest.getFirstName())
+                                .lastName(userRequest.getLastName())
                                 .hashPassword(passwordEncoder.encode(userRequest.getPassword()))
                                 .roles(Collections.singleton(roleRepository.findByRole(Role.USER)
                                         .orElseThrow(() -> new NotFoundException("Role not found"))))
+                                .imageMetadata(imageMetadataRepository.getById(UUID.fromString("f73c03ee-2b2e-4e21-9fd1-e5e78dc66cf1")))
                                 .build()
                 )
         );
@@ -70,6 +81,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateImage(UUID id, MultipartFile image) {
-
+        UserEntity user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        ImageMetadataEntity imageMetadata = imageCdnService.upload(image);
+        user.setImageMetadata(imageMetadata);
+        userRepository.save(user);
     }
 }

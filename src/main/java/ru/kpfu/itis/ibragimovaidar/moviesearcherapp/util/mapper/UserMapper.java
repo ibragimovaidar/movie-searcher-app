@@ -11,7 +11,7 @@ import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.model.UserEntity;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+@Mapper(componentModel = "spring", uses = ReviewMapper.class, nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface UserMapper {
 
     @Mapping(expression = "java(roleEntitiesToRoles(user.getRoles()))", target = "roles")

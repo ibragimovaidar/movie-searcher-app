@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -38,4 +39,7 @@ public class UserEntity extends ImageAbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<RoleEntity> roles;
+
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    private List<ReviewEntity> reviews;
 }

@@ -11,14 +11,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReviewRequest {
-
-    private Integer rating;
-
-    private String title;
-
-    private String review;
+public class MovieCommentaryRequest {
 
     private UUID movieId;
 
+    private String text;
 }

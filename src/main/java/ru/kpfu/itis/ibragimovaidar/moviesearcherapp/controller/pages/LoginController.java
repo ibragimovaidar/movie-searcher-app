@@ -1,11 +1,11 @@
-package ru.kpfu.itis.ibragimovaidar.moviesearcherapp.controller.pages.GenrePageController;
+package ru.kpfu.itis.ibragimovaidar.moviesearcherapp.controller.pages;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/signIn")
+@RequestMapping("/login")
 public class LoginController {
 
     @GetMapping

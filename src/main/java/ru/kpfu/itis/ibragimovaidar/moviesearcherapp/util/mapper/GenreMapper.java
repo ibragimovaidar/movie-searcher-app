@@ -7,7 +7,7 @@ import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.model.GenreEntity;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+@Mapper(componentModel = "spring", uses = MovieMapper.class, nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface GenreMapper {
 
     GenreResponse genreToGenreResponse(GenreEntity genre);

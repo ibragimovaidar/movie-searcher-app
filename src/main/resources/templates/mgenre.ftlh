@@ -1,17 +1,17 @@
 <#ftl encoding='UTF-8'>
 <#include "base.ftlh">
-<#macro title>Sign in</#macro>
+<#macro title>Movies</#macro>
 <#macro main>
     <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <br>
-            <h2>${movieGenreDTO.name}</h2>
+            <h2>${genre.name}</h2>
             <ul class="list-unstyled">
-                <#list movies as movieDTO>
+                <#list genre.movies as movie>
                     <li>
-                        <a href="/movie/${movieDTO.id}" class="link__grey">
-                            <strong>${movieDTO.name}</strong>
+                        <a href="/movies/${movie.id}" class="link__grey">
+                            <strong>${movie.name}</strong>
                         </a>
                     </li>
                 </#list>

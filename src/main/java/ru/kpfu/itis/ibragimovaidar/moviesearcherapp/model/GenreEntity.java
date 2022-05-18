@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 import ru.kpfu.itis.ibragimovaidar.moviesearcherapp.model.commentary.GenreCommentaryEntity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -25,4 +26,7 @@ public class GenreEntity extends ImageAbstractEntity {
 
     @OneToMany(mappedBy = "genre")
     private Set<GenreCommentaryEntity> commentaries;
+
+    @OneToMany(mappedBy = "genre")
+    private List<MovieEntity> movies;
 }

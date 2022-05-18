@@ -1,7 +1,9 @@
 package ru.kpfu.itis.ibragimovaidar.moviesearcherapp.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -10,6 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @SuperBuilder
 @Entity
+@Getter
+@Setter
 @Table(name = "review")
 public class ReviewEntity extends AbstractEntity {
 

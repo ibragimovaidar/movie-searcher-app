@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -22,4 +23,6 @@ public class GenreResponse {
     private String description;
 
     private String imageUrl;
+
+    private List<MovieResponse> movies;
 }

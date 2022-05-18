@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS v5.0.2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <header>
@@ -79,14 +79,14 @@
             $("#exampleModal").modal('show');
             event.preventDefault();
             $.ajax({
-                url:'/review?' + event.target.id,
+                url:'/reviews/ajax/' + event.target.id,
                 type:'GET',
                 dataType: 'json',
                 success: function(data) {
-                    $("#modal-review-movieName").html(data['movieName']);
-                    $("#modal-review-movieName").attr('href', '/movie/' + data['movieId']);
+                    $("#modal-review-movieName").html(data['movie'].name);
+                    $("#modal-review-movieName").attr('href', '/movies/' + data['movie'].id);
                     $("#modal-review-rating").html(data['rating'] + '/100');
-                    $("#modal-review-text").html(data['description']);
+                    $("#modal-review-text").html(data['review']);
                 },
                 error: function(){
                     $(".modal-body").html('Error');

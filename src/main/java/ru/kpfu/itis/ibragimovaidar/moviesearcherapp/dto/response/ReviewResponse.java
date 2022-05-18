@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+import java.util.UUID;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 @AllArgsConstructor
@@ -13,9 +16,15 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ReviewResponse {
 
+    private UUID id;
+
     private Integer rating;
 
     private String title;
 
     private String review;
+
+    private MovieResponse movie;
+
+    private Instant createDate;
 }

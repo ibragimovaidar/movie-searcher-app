@@ -1,6 +1,6 @@
 <#ftl encoding='UTF-8'>
 <#include "base.ftlh">
-<#macro title>Sign in</#macro>
+<#macro title>Genres</#macro>
 <#macro main>
     <div class="container">
         <div class="row">
@@ -8,9 +8,9 @@
                 <br>
                 <h2>Жанры кино:</h2>
                 <ul class="list-unstyled">
-                    <#list movieGenres as genre>
+                    <#list genres as genre>
                         <li>
-                            <a href="/genres?id=${genre.id}" class="link__grey">
+                            <a href="/genres/${genre.id}" class="link__grey">
                                 <strong>${genre.name}</strong>
                             </a>
                         </li>

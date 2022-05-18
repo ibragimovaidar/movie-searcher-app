@@ -130,8 +130,16 @@
     </changeSet>
 
     <changeSet id="007" author="Aydar Ibragimov">
+        <sqlFile dbms="postgresql"
+                 path="sql/insert_image_metadata.sql"
+                 splitStatements="false"
+                 encoding="utf-8"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="008" author="Aydar Ibragimov">
         <addColumn tableName="users">
-            <column name="image_metadata_id" type="uuid">
+            <column name="image_metadata_id" type="uuid" defaultValue="'f73c03ee-2b2e-4e21-9fd1-e5e78dc66cf1'">
                 <constraints foreignKeyName="fk_users_image_metadata"
                              referencedTableName="image_metadata"
                              referencedColumnNames="id"/>
